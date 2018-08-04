@@ -1,17 +1,23 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { ErrorHandler, NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { Camera } from '@ionic-native/camera';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { StatusBar } from '@ionic-native/status-bar';
-import { IonicStorageModule, Storage } from '@ionic/storage';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {ErrorHandler, NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {Camera} from '@ionic-native/camera';
+import {SplashScreen} from '@ionic-native/splash-screen';
+import {StatusBar} from '@ionic-native/status-bar';
+import {IonicStorageModule, Storage} from '@ionic/storage';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
 
-import { Items } from '../mocks/providers/items';
-import { Settings, User, Api } from '../providers';
-import { MyApp } from './app.component';
+import {Items} from '../mocks/providers/items';
+import {Api, Settings, User} from '../providers';
+import {MyApp} from './app.component';
+
+import {BarcodeScanner} from '@ionic-native/barcode-scanner';
+import {Toast} from '@ionic-native/toast';
+import {DataServiceProvider} from '../providers/data-service/data-service';
+import {HttpModule} from '@angular/http';
+
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -49,7 +55,8 @@ export function provideSettings(storage: Storage) {
       }
     }),
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -64,7 +71,10 @@ export function provideSettings(storage: Storage) {
     StatusBar,
     { provide: Settings, useFactory: provideSettings, deps: [Storage] },
     // Keep this to enable Ionic's runtime error handling during development
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    BarcodeScanner,
+    Toast,
+    DataServiceProvider
   ]
 })
 export class AppModule { }
