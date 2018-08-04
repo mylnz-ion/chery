@@ -1,0 +1,8 @@
+{
+  "name": "chery",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular",
+  "pro_id": "bf8cf8ac"
+}
