@@ -1,0 +1,14 @@
+page-place-menu-list {
+  ion-card.menu-list p {
+    font-size: 0.7em !important;
+  }
+
+  ion-content.cards-bg {
+    background-color: #f4f4f7;
+  }
+
+  ion-card.cards-list ion-card-header {
+    color: map-get($colors, primary);
+  }
+
+}

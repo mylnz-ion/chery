@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{ 'PAGE_TITLE_MENU_LIST' | translate }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="cards-bg">
+  <ion-card-header>
+    {{restaurantName}}
+  </ion-card-header>
+
+  <ion-card *ngFor="let menu of menuItemList" class="cards-list">
+    <ion-list>
+      <button ion-item>
+        <ion-icon name="restaurant" item-start></ion-icon>
+        {{menu.menuClassName}}
+      </button>
+    </ion-list>
+  </ion-card>
+
+</ion-content>
