@@ -6,7 +6,7 @@
   "EMAIL": "Email",
   "LOGIN": "Giriş yap",
   "SIGNUP": "Kayıt ol",
-  "TAB1_TITLE": "Öğeler",
+  "TAB1_TITLE": "Mekanlar",
   "TAB2_TITLE": "Arama",
   "TAB3_TITLE": "Ayarlar",
   "TAB4_TITLE": "QR-S",
@@ -34,5 +34,7 @@
   "ITEM_CREATE_TITLE": "Yeni Öğe",
   "ITEM_CREATE_CHOOSE_IMAGE": "Yeni Görsel",
   "CARDS_TITLE": "Sosyal",
-  "SEARCH_TITLE": "Arama"
+  "SEARCH_TITLE": "Arama",
+  "CARDS_TITLE_PLACES": "Mekanlar",
+  "PAGE_TITLE_MENU_LIST": "Menu Listesi"
 }

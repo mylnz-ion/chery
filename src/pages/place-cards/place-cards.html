@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{ 'CARDS_TITLE_PLACES' | translate }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="cards-bg">
+  <ion-card *ngFor="let place of xPlaces" class="places">
+    <div style="position: relative">
+      <img src={{place.defaultImgPath}}>
+
+      <ion-fab right top>
+        <button ion-fab class="fab-map">
+          <ion-icon name="pin"></ion-icon>
+        </button>
+      </ion-fab>
+    </div>
+
+    <ion-item>
+      <ion-icon name="restaurant" item-start large></ion-icon>
+      <h2>{{place.name}}</h2>
+      <p>{{place.lat}}, {{place.lon}}</p>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="cafe" item-start large></ion-icon>
+      <h2>{{place.name}}</h2>
+      <p>{{place.lat}}, {{place.lon}}</p>
+    </ion-item>
+
+    <ion-item actions>
+      <span ion-text item-start color="secondary" class="item-bold">18 min</span>
+      <span ion-text item-start color="subtle">(2.6 km)</span>
+      <button ion-button color="primary" clear item-end icon-start>
+        <ion-icon name='navigate'></ion-icon>
+        Start
+      </button>
+    </ion-item>
+  </ion-card>
+
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="!isLastPage">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

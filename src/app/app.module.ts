@@ -17,6 +17,8 @@ import {BarcodeScanner} from '@ionic-native/barcode-scanner';
 import {Toast} from '@ionic-native/toast';
 import {DataServiceProvider} from '../providers/data-service/data-service';
 import {HttpModule} from '@angular/http';
+import { PlacesProvider } from '../providers/places/places';
+import { RestApiProvider } from '../providers/rest-api/rest-api';
 
 
 // The translate loader needs to know where to load i18n files
@@ -74,7 +76,9 @@ export function provideSettings(storage: Storage) {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     BarcodeScanner,
     Toast,
-    DataServiceProvider
+    DataServiceProvider,
+    PlacesProvider,
+    RestApiProvider
   ]
 })
 export class AppModule { }

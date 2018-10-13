@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>qrs</ion-title>
+    <ion-title>QRS</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -18,24 +18,23 @@
 </ion-content>
 
 <ion-content padding>
-  The world is your oyster.
   <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
+    JUST SCAN THAT QR
   </p>
   <h1>
-    <button ion-button color="dark" full round (click)="scan()">Start Scan</button>
+    <button ion-button color="dark" full round (click)="scanQrCode()">JUST SCAN THAT QR</button>
   </h1>
 
-  <ion-card *ngIf="productFound">
-    <ion-card-header>
-      <h2>Price: $ {{selectedProduct.price}}</h2>
-    </ion-card-header>
-    <ion-card-content>
-      <ul>
-        <li>{{selectedProduct.plu}}</li>
-        <li>{{selectedProduct.name}}</li>
-        <li>{{selectedProduct.desc}}</li>
-      </ul>
-    </ion-card-content>
-  </ion-card>
+  <!--<ion-card *ngIf="qrCodeItemFound">-->
+    <!--<ion-card-header>-->
+      <!--<h2>Price: $ {{foundItems.price}}</h2>-->
+    <!--</ion-card-header>-->
+    <!--<ion-card-content>-->
+      <!--<ul>-->
+        <!--<li>{{foundItems.plu}}</li>-->
+        <!--<li>{{foundItems.name}}</li>-->
+        <!--<li>{{foundItems.desc}}</li>-->
+      <!--</ul>-->
+    <!--</ion-card-content>-->
+  <!--</ion-card>-->
 </ion-content>

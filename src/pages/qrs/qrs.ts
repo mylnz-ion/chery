@@ -17,10 +17,8 @@ import {DataServiceProvider} from '../../providers/data-service/data-service';
   templateUrl: 'qrs.html',
 })
 export class QrsPage {
-
-  products: any[] = [];
-  selectedProduct: any;
-  productFound: boolean = false;
+  foundItems = [];
+  qrCodeItemFound: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public platform: Platform,
@@ -28,33 +26,35 @@ export class QrsPage {
               private toast: Toast,
               public dataService: DataServiceProvider) {
 
-    this.dataService.getProducts()
-      .subscribe((response) => {
-        this.products = response;
-        console.log(this.products);
-      });
-
-    this.productFound = false;
-    this.selectedProduct = {};
+    this.qrCodeItemFound = false;
+    this.foundItems = [];
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad QrsPage');
   }
 
-  scan() {
-    this.selectedProduct = {};
+  scanQrCode() {
+    this.foundItems = [];
 
     if (this.platform.is('cordova')) {
       this.barcodeScanner.scan().then((barcodeData) => {
-        this.selectedProduct = this.products.find(product => product.plu === barcodeData.text);
 
-        if (this.selectedProduct !== undefined) {
-          this.productFound = true;
-          console.log(this.selectedProduct);
+        this.dataService.getMenuItemByQrCode(barcodeData.text).then(resData => {
+          // @ts-ignore
+          for (let i = 0; i < resData.length; i++) {
+            this.foundItems.push(resData[i]);
+          }
+
+          console.log(this.foundItems);
+        });
+
+        if (this.foundItems !== undefined) {
+          this.qrCodeItemFound = true;
+          console.log(this.foundItems);
         } else {
-          this.selectedProduct = {};
-          this.productFound = false;
+          this.foundItems = [];
+          this.qrCodeItemFound = false;
           this.toast.show('Product not found', '5000', 'center').subscribe(
             toast => {
               console.log(toast);
@@ -69,22 +69,35 @@ export class QrsPage {
         );
       });
     } else {
-      let barcodeDataText = "01234567895";
+      let barcodeDataText = "24f5d661cf444d6df27a29c5b94a30adfde0503ac3279da6df8bc6bc3aab30b5";
 
-      this.selectedProduct = this.products.find(product => product.plu === barcodeDataText);
+      this.dataService.getMenuItemByQrCode(barcodeDataText).then(resData => {
+        // @ts-ignore
+        for (let i = 0; i < resData.length; i++) {
+          this.foundItems.push(resData[i]);
+        }
 
-      if (this.selectedProduct == undefined) {
-        this.selectedProduct = {};
-        this.productFound = false;
-        this.toast.show('Product not found', '5000', 'center').subscribe(
-          toast => {
-            console.log(toast);
-          }
-        );
-      } else {
-        this.productFound = true;
-        console.log(this.selectedProduct);
-      }
+        if (this.foundItems == undefined) {
+          this.foundItems = [];
+          this.qrCodeItemFound = false;
+          this.toast.show('Product not found', '5000', 'center').subscribe(
+            toast => {
+              console.log(toast);
+            }
+          );
+        } else {
+          this.qrCodeItemFound = true;
+          this.goPlaceMenuList(this.foundItems);
+        }
+      });
+
     }
+  }
+
+  // navigate to menu list
+  goPlaceMenuList(foundItems) {
+    this.navCtrl.push('PlaceMenuListPage', {
+      paramItemsMenuList: foundItems,
+    });
   }
 }
