@@ -39,28 +39,25 @@ export class QrsPage {
 
     if (this.platform.is('cordova')) {
       this.barcodeScanner.scan().then((barcodeData) => {
-
         this.dataService.getMenuItemByQrCode(barcodeData.text).then(resData => {
           // @ts-ignore
           for (let i = 0; i < resData.length; i++) {
             this.foundItems.push(resData[i]);
           }
 
-          console.log(this.foundItems);
+          if (this.foundItems == undefined) {
+            this.foundItems = [];
+            this.qrCodeItemFound = false;
+            this.toast.show('Product not found', '5000', 'center').subscribe(
+              toast => {
+                console.log(toast);
+              }
+            );
+          } else {
+            this.qrCodeItemFound = true;
+            this.goPlaceMenuList(this.foundItems);
+          }
         });
-
-        if (this.foundItems !== undefined) {
-          this.qrCodeItemFound = true;
-          console.log(this.foundItems);
-        } else {
-          this.foundItems = [];
-          this.qrCodeItemFound = false;
-          this.toast.show('Product not found', '5000', 'center').subscribe(
-            toast => {
-              console.log(toast);
-            }
-          );
-        }
       }, (err) => {
         this.toast.show(err, '5000', 'center').subscribe(
           toast => {
